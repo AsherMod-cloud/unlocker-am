@@ -191,7 +191,7 @@ export async function onRequestPost({ request, env, params }) {
     
     const buf = new Uint8Array(6);
     crypto.getRandomValues(buf);
-    const orderId = 'neo-' + Array.from(buf, x => x.toString(16).padStart(2, '0')).join('');
+    const orderId = 'asher-' + Array.from(buf, x => x.toString(16).padStart(2, '0')).join('');
     
     try {
       const h = {
