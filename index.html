@@ -117,17 +117,29 @@
     </div>
     <p class="card-desc">Selesaikan verifikasi keamanan Cloudflare dan aktifkan lisensi VIP tahunanmu.</p>
     
-    <!-- TURNSTILE WIDGET -->
-    <div class="turnstile-container">
-      <div class="cf-turnstile" data-sitekey="0x4AAAAAAFuPT2AMvCx7TRDU" data-theme="dark"></div>
-    </div>
-    
-    <button class="btn-primary btn-disabled" id="btnActivate" onclick="activatePremium()" disabled>
-      <span>Aktifkan Premium Sekarang</span>
-      <i data-lucide="zap"></i>
-    </button>
-  </div>
+    <!-- form: activate -->
+<div class="card">
+  <h2 class="card-title">Aktifkan Premium 1 Tahun</h2>
+  <p class="card-desc">Lisensi VIP 1 tahun untuk akun yang terverifikasi.</p>
+  
+  <!-- TURNSTILE WIDGET -->
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAAFuPT2AMvCx7TRDU" data-theme="dark" style="margin-bottom: 16px;"></div>
+  
+  <button class="btn-primary btn-disabled" id="btnActivate" onclick="activatePremium()" disabled>Aktifkan Premium</button>
+</div>
 
+<!-- HISTORY SECTION (BARU) -->
+<div class="card history-card">
+  <div class="history-head">
+    <h2 class="card-title" style="margin: 0;">Riwayat Unlock</h2>
+    <button class="btn-text" onclick="clearHistory()">Hapus</button>
+  </div>
+  <p class="card-desc">Daftar akun yang pernah di-unlock di perangkat ini.</p>
+  <div id="historyList" class="history-list">
+    <p class="history-empty">Belum ada history.</p>
+  </div>
+</div>
+    
   <!-- Floating Actions -->
   <div class="floating-actions">
     <a href="https://t.me/Unkncwn_x" target="_blank" class="fab" aria-label="Telegram">

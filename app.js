@@ -53,6 +53,55 @@ function getTurnstileToken() {
 function resetTurnstile() {
   if (window.turnstile) window.turnstile.reset();
 }
+
+// --- HELPER HISTORY ---
+function getHistory() {
+  try {
+    return JSON.parse(localStorage.getItem('unlocker_am_history')) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveHistory(data) {
+  const history = getHistory();
+  // hapus data lama kalau email sama (biar ga dobel)
+  const filtered = history.filter(h => h.email !== data.email);
+  // taruh data baru di paling atas
+  filtered.unshift(data);
+  // simpan
+  localStorage.setItem('unlocker_am_history', JSON.stringify(filtered));
+  renderHistory();
+}
+
+function renderHistory() {
+  const listEl = document.getElementById('historyList');
+  if (!listEl) return;
+  
+  const history = getHistory();
+  if (history.length === 0) {
+    listEl.innerHTML = '<p class="history-empty">Belum ada history.</p>';
+    return;
+  }
+  
+  listEl.innerHTML = history.map(item => `
+    <div class="history-item">
+      <div class="history-info">
+        <span class="history-email">${item.email}</span>
+        <span class="history-date">${item.date}</span>
+      </div>
+      <span class="history-badge">VIP</span>
+    </div>
+  `).join('');
+}
+
+function clearHistory() {
+  if (!confirm('Hapus semua riwayat unlock?')) return;
+  localStorage.removeItem('unlocker_am_history');
+  renderHistory();
+  toast('History dibersihkan', 'info');
+}
+
 // ------------------------
 
 async function post(endpoint, body) {
@@ -132,7 +181,7 @@ async function activatePremium() {
     const res = await post('/activated', { email: currentEmail, idToken: idTokenCache });
     
     if (res.success) {
-      resetTurnstile();
+      resetTurnstile(); 
       orderCache = res.orderId || res.order || 'unknown';
       
       let expiryText = 'Unknown';
@@ -149,6 +198,14 @@ async function activatePremium() {
       document.getElementById('resToken').textContent = idTokenCache;
       
       document.getElementById('successModal').classList.add('show');
+      
+      // --- SIMPAN KE HISTORY ---
+      saveHistory({
+        email: currentEmail,
+        date: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+        orderId: orderCache,
+        expiry: expiryText
+      });
       
     } else {
       toast(res.message || 'Gagal aktivasi', 'error');
@@ -183,6 +240,11 @@ function unlockAgain() {
   btnAct.disabled = true;
   btnAct.classList.add('btn-disabled');
   
-  updateStepIndicator(1);
-  toast('Siap untuk unlock akun berikutnya', 'info');
+  toast('Siap untuk unlock berikutnya', 'info');
 }
+
+// --- INIT ---
+// Panggil renderHistory pas web pertama kali dibuka
+document.addEventListener('DOMContentLoaded', () => {
+  renderHistory();
+});
