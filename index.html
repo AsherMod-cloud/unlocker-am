@@ -20,13 +20,13 @@
 <meta property="og:title" content="Alight Motion Premium — AsherMod" />
 <meta property="og:description" content="Panel otomatis pengiriman magic link dan aktivasi Alight Motion VIP 1 Tahun oleh AsherMod." />
 <meta property="og:image" content="assets/image/favicon.png" />
-<meta property="og:url" content="https://asher-mod-bio.pages.dev" />
+<meta property="og:url" content="https://unlocker-am.pages.dev" />
 <meta property="og:locale" content="id_ID" />
 
 <!-- Stylesheet & Scripts -->
 <link rel="stylesheet" href="style.css" />
-<script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
@@ -122,22 +122,16 @@
   <h2 class="card-title">Aktifkan Premium 1 Tahun</h2>
   <p class="card-desc">Lisensi VIP 1 tahun untuk akun yang terverifikasi.</p>
   
-  <!-- TURNSTILE WIDGET -->
   <div class="cf-turnstile" data-sitekey="0x4AAAAAAFuPT2AMvCx7TRDU" data-theme="dark" style="margin-bottom: 16px;"></div>
   
   <button class="btn-primary btn-disabled" id="btnActivate" onclick="activatePremium()" disabled>Aktifkan Premium</button>
 </div>
 
-<!-- HISTORY SECTION (BARU) -->
-<div class="card history-card">
-  <div class="history-head">
-    <h2 class="card-title" style="margin: 0;">Riwayat Unlock</h2>
-    <button class="btn-text" onclick="clearHistory()">Hapus</button>
-  </div>
-  <p class="card-desc">Daftar akun yang pernah di-unlock di perangkat ini.</p>
-  <div id="historyList" class="history-list">
-    <p class="history-empty">Belum ada history.</p>
-  </div>
+<!-- TOMBOL KE HISTORY -->
+<div style="text-align: center; margin-top: 24px;">
+  <a href="/history.html" class="btn-outline" style="display: inline-block; text-decoration: none; padding: 12px 24px;">
+    Lihat Riwayat Unlock
+  </a>
 </div>
     
   <!-- Floating Actions -->

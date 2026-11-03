@@ -55,51 +55,16 @@ function resetTurnstile() {
 }
 
 // --- HELPER HISTORY ---
-function getHistory() {
-  try {
-    return JSON.parse(localStorage.getItem('unlocker_am_history')) || [];
-  } catch {
-    return [];
-  }
-}
-
+// app.js cuma butuh nyimpen, ga perlu render
 function saveHistory(data) {
-  const history = getHistory();
-  // hapus data lama kalau email sama (biar ga dobel)
-  const filtered = history.filter(h => h.email !== data.email);
-  // taruh data baru di paling atas
-  filtered.unshift(data);
-  // simpan
-  localStorage.setItem('unlocker_am_history', JSON.stringify(filtered));
-  renderHistory();
-}
-
-function renderHistory() {
-  const listEl = document.getElementById('historyList');
-  if (!listEl) return;
-  
-  const history = getHistory();
-  if (history.length === 0) {
-    listEl.innerHTML = '<p class="history-empty">Belum ada history.</p>';
-    return;
+  try {
+    const history = JSON.parse(localStorage.getItem('unlocker_am_history')) || [];
+    const filtered = history.filter(h => h.email !== data.email);
+    filtered.unshift(data);
+    localStorage.setItem('unlocker_am_history', JSON.stringify(filtered));
+  } catch (e) {
+    console.error('Gagal simpan history', e);
   }
-  
-  listEl.innerHTML = history.map(item => `
-    <div class="history-item">
-      <div class="history-info">
-        <span class="history-email">${item.email}</span>
-        <span class="history-date">${item.date}</span>
-      </div>
-      <span class="history-badge">VIP</span>
-    </div>
-  `).join('');
-}
-
-function clearHistory() {
-  if (!confirm('Hapus semua riwayat unlock?')) return;
-  localStorage.removeItem('unlocker_am_history');
-  renderHistory();
-  toast('History dibersihkan', 'info');
 }
 
 // ------------------------
@@ -200,19 +165,22 @@ async function activatePremium() {
       document.getElementById('successModal').classList.add('show');
       
       // --- SIMPAN KE HISTORY ---
-      saveHistory({
-        email: currentEmail,
-        date: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        orderId: orderCache,
-        expiry: expiryText
-      });
+			saveHistory({
+			  email: currentEmail,
+			  uid: uidCache || '-', // <-- tambah UID
+			  expiry: expiryText,   // <-- tambah Expired
+			  orderId: orderCache,  // <-- tambah Order ID
+			  token: idTokenCache,  // <-- tambah ID Token
+			  date: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+		});
+// -------------------------
       
     } else {
       toast(res.message || 'Gagal aktivasi', 'error');
       resetTurnstile();
     }
   } catch (err) {
-    toast('Terjadi kesalahan koneksi', 'error');
+    toast('Koneksi error', 'error');
     resetTurnstile();
   } finally {
     setLoading('btnActivate', false);
@@ -242,9 +210,3 @@ function unlockAgain() {
   
   toast('Siap untuk unlock berikutnya', 'info');
 }
-
-// --- INIT ---
-// Panggil renderHistory pas web pertama kali dibuka
-document.addEventListener('DOMContentLoaded', () => {
-  renderHistory();
-});
