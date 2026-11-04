@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Panduan Klaim — Unlocker AM</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  /* --- tutorial page --- */
+.tutorial-card {
+  padding: 24px;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background: #1f242d;
+  color: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.step-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.step-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.step-desc b { color: var(--text-main); }
+
+.img-wrapper {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1f242d;
+  background: #03070d;
+  margin-top: 12px;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+</style>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="container">
+  <header class="header" style="text-align: left; margin-bottom: 24px;">
+    <a href="/" class="btn-outline" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; font-size: 12px; text-decoration: none; border-radius: 20px;">
+      <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i> Beranda
+    </a>
+    <h1 style="margin-top: 20px; font-size: 28px; line-height: 1.2;">Panduan <span class="gradient-text">Klaim Premium</span></h1>
+    <p class="card-desc" style="margin-top: 8px;">Ikuti langkah berikut secara berurutan agar proses klaim berjalan lancar.</p>
+  </header>
+
+  <!-- STEP 1 -->
+  <div class="card tutorial-card">
+    <div class="step-header">
+      <div class="step-number">1</div>
+      <h2 class="step-title">Login ke Aplikasi</h2>
+    </div>
+    <p class="step-desc">Buka aplikasi Alight Motion di HP kamu, lalu login menggunakan akun Google yang aktif.</p>
+    <div class="img-wrapper">
+      <img src="assets/image/unlockeram-step1.jpg" alt="Langkah 1 - Login" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card tutorial-card">
+    <div class="step-header">
+      <div class="step-number">2</div>
+      <h2 class="step-title">Masukkan Email</h2>
+    </div>
+    <p class="step-desc">Kembali ke halaman utama web ini, masukkan email yang sama dengan yang kamu pakai untuk login tadi, lalu klik "Kirim Magic Link".</p>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card tutorial-card">
+    <div class="step-header">
+      <div class="step-number">3</div>
+      <h2 class="step-title">Cek Email Masuk</h2>
+    </div>
+    <p class="step-desc">Buka kotak masuk email kamu. Cari email dari <b>noreply</b> dengan subjek "Sign in to Alight Creative". <i>(Cek juga folder Spam jika tidak ada).</i></p>
+    <div class="img-wrapper">
+      <img src="assets/image/unlockeram-step2.jpg" alt="Langkah 2 - Cek Email" loading="lazy" />
+    </div>
+    <p class="step-desc" style="margin-top: 16px;">Buka email tersebut, lalu <b>tekan tahan (long press)</b> pada tulisan "Sign in to Alight Creative".</p>
+    <div class="img-wrapper">
+      <img src="assets/image/unlockeram-step3.jpg" alt="Langkah 3 - Buka Email" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="card tutorial-card">
+    <div class="step-header">
+      <div class="step-number">4</div>
+      <h2 class="step-title">Salin URL Link</h2>
+    </div>
+    <p class="step-desc">Setelah ditekan tahan, akan muncul menu pop-up. Pilih dan klik <b>"Salin URL"</b> atau <b>"Copy Link"</b>.</p>
+    <div class="img-wrapper">
+      <img src="assets/image/unlockeram-step4.jpg" alt="Langkah 4 - Salin URL" loading="lazy" />
+    </div>
+    <p class="step-desc" style="margin-top: 16px;">Kembali ke web, tempel (paste) URL panjang tersebut ke kolom "Verifikasi Akun", lalu klik tombol verifikasi.</p>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="card tutorial-card">
+    <div class="step-header">
+      <div class="step-number">5</div>
+      <h2 class="step-title">Aktivasi & Cek Kembali</h2>
+    </div>
+    <p class="step-desc">Jika verifikasi berhasil, klik tombol <b>Aktifkan Premium 1 Tahun</b>. Selesai! Kamu bisa cek kembali aplikasi Alight Motion kamu, statusnya sudah menjadi premium.</p>
+    <div class="img-wrapper">
+      <img src="assets/image/unlockeram-step5.jpg" alt="Langkah 5 - Cek Kembali" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div style="text-align: center; margin-top: 32px; margin-bottom: 48px;">
+    <a href="/" class="btn-primary" style="display: inline-block; text-decoration: none; width: 100%; max-width: 300px; margin: 0 auto;">
+      Mulai Klaim Sekarang
+    </a>
+  </div>
+
+</div>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

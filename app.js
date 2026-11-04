@@ -55,15 +55,19 @@ function resetTurnstile() {
 }
 
 // --- HELPER HISTORY ---
-// app.js cuma butuh nyimpen, ga perlu render
-function saveHistory(data) {
+function addHistoryRecord(record) {
+  const STORAGE_KEY = 'unlocker_am_history';
   try {
-    const history = JSON.parse(localStorage.getItem('unlocker_am_history')) || [];
-    const filtered = history.filter(h => h.email !== data.email);
-    filtered.unshift(data);
-    localStorage.setItem('unlocker_am_history', JSON.stringify(filtered));
+    let list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    // Filter jika email yang sama sudah ada, ganti dengan yang terbaru di posisi paling atas
+    list = list.filter(item => item.email !== record.email);
+    list.unshift({
+      ...record,
+      timestamp: Date.now()
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
   } catch (e) {
-    console.error('Gagal simpan history', e);
+    console.error('Gagal menyimpan riwayat unlock:', e);
   }
 }
 
@@ -165,7 +169,7 @@ async function activatePremium() {
       document.getElementById('successModal').classList.add('show');
       
       // --- SIMPAN KE HISTORY ---
-			saveHistory({
+			addHistoryRecord({
 			  email: currentEmail,
 			  uid: uidCache || '-', // <-- tambah UID
 			  expiry: expiryText,   // <-- tambah Expired
